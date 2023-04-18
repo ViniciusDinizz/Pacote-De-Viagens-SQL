@@ -8,7 +8,7 @@ using PacoteDeViagens.Models;
 
 namespace PacoteDeViagens.Services
 {
-    internal class ClientServices
+    public class ClientServices
     {
         readonly string strConn = @"Server=(localdb)\MSSQLLocalDB;Integrated Security=true;AttachDbFileName=C:\Users\5by5\Desktop\banco\trip.mdf";
         readonly SqlConnection conn;

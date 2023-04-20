@@ -16,7 +16,7 @@ namespace PacoteDeViagens.Models
 
         public override string ToString()
         {
-            return $"Nome:{Name} | Telefone:{Telefone} ";
+            return $"Nome:{Name}\nTelefone:{Telefone}\nDataCadastro:{DtCadastro}\n{Address} ";
         }
     }
 }

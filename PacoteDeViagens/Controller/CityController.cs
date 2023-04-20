@@ -8,14 +8,19 @@ using PacoteDeViagens.Services;
 
 namespace PacoteDeViagens.Controller
 {
-    internal class CityController
+    public class CityController
     {
         public bool Insert(City city)
         {
             return new CityServices().Insert(city);
         }
 
-        public List<City> FindAll() 
+        public bool Delete(string city)
+        {
+            return new CityServices().Delete(city);
+        }
+
+        public List<City> FindAll()
         {
             return new CityServices().FindAll();
         }

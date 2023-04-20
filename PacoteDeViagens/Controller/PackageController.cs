@@ -8,11 +8,21 @@ using PacoteDeViagens.Services;
 
 namespace PacoteDeViagens.Controller
 {
-    internal class PackageController
+    public class PackageController
     {
         public bool Insert(Packages packages)
         {
             return new PackageServices().Insert(packages);
+        }
+
+        public bool Delete(string package)
+        {
+            return new PackageServices().Delete(package);
+        }
+
+        public List<Packages> FindAll()
+        {
+            return new PackageServices().FindAll();
         }
     }
 }

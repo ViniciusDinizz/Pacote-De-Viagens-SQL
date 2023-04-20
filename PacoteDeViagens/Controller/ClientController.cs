@@ -15,6 +15,11 @@ namespace PacoteDeViagens.Controller
             return new ClientServices().Insert(client);
         }
 
+        public bool Delete(string client)
+        {
+            return new ClientServices().Delete(client);
+        }
+
         public List<Client> FindAll() 
         {
             return new ClientServices().FindAll();

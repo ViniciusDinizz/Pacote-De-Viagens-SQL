@@ -8,11 +8,22 @@ using PacoteDeViagens.Services;
 
 namespace PacoteDeViagens.Controller
 {
-    internal class TicketController
+    public class TicketController
     {
         public bool Insert(Ticket ticket)
         {
             return new TicketServices().Insert(ticket);
         }
+
+        public bool Delete(string ticket)
+        {
+            return new TicketServices().Delete(ticket);
+        }
+
+        public List<Ticket> FindAll() 
+        {
+            return new TicketServices().FindAll();
+        }
+
     }
 }

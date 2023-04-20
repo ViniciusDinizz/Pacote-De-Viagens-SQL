@@ -16,5 +16,10 @@ namespace PacoteDeViagens.Models
         public string Complement { get; set; }
         public City City { get; set; }
         public DateTime DtCadastro { get; set; }
+
+        public override string ToString()
+        {
+            return $"Street:{Street}\nNumber:{Number}\nBurgh:{Burgh}\nCep:{CEP}\nComplement:{Complement}\n{City}\n{DtCadastro}\n";
+        }
     }
 }

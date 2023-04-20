@@ -8,14 +8,19 @@ using PacoteDeViagens.Services;
 
 namespace PacoteDeViagens.Controller
 {
-    internal class HotelController
+    public class HotelController
     {
         public bool InsertHotel(Hotel hotel)
         {
             return new HotelServices().Insert(hotel);
         }
 
-        public List<Hotel> FindAll() 
+       public bool Delete(string hotel)
+        {
+            return new HotelServices().Delete(hotel);
+        }
+
+        public List<Hotel> FindAll()
         {
             return new HotelServices().FindAll();
         }

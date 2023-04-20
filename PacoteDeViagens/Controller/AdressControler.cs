@@ -15,6 +15,11 @@ namespace PacoteDeViagens.Controller
             return new AdressServices().Insert(adress);
         }
 
+        public bool Delete(string adress)
+        {
+            return new AdressServices().Delete(adress);
+        }
+
         public List<Adress> FindAll()
         {
             return new AdressServices().FindAll();

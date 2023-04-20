@@ -51,13 +51,68 @@ namespace PacoteDeViagens.Services
 
         private int InsertCity (Adress adress)
         {
-            string srtInsert = "Insert into City (Description) VALUES (@Description) select cast(scope_identity() as int)";
+            string srtInsert = "INSERT  INTO City(Description, DtCadastro) VALUES (@Description, @DtCadastro); select cast(scope_identity() as int)";
             SqlCommand commandinsert = new SqlCommand(srtInsert, conn);
+
             commandinsert.Parameters.Add(new SqlParameter("@Description", adress.City.Description));
+            commandinsert.Parameters.Add(new SqlParameter("@DtCadastro", adress.City.DtCadastro));
 
             return (int)commandinsert.ExecuteScalar();
         }
 
-    
+        public bool Delete(string adress)
+        {
+            bool status = false;
+            try
+            {
+                string strDelete = "DELETE FROM Adress Where Id = " + adress;
+
+                SqlCommand commanddelete = new SqlCommand(strDelete, conn);
+
+                commanddelete.ExecuteNonQuery();
+
+                status = true;
+            }
+            catch (Exception) { status = false; throw; }
+            finally { conn.Close(); }
+
+            return status;
+        }
+
+        public List<Adress> FindAll() 
+        {
+            List<Adress> Adress = new();
+
+            StringBuilder sb = new StringBuilder();
+
+            sb.Append("select a.Id, ");
+            sb.Append("     a.Street, ");
+            sb.Append("     a.Number, ");
+            sb.Append("     a.Burgh, ");
+            sb.Append("     a.Cep, ");
+            sb.Append("     a.Complement, ");
+            sb.Append("     c.Description AS City, c.DtCadastro");
+            sb.Append(" FROM Adress a, City c ");
+            sb.Append(" WHERE a.IdCity = c.Id");
+
+            SqlCommand commandSelect = new(sb.ToString(), conn);
+            SqlDataReader dr = commandSelect.ExecuteReader();
+
+            while (dr.Read())
+            {
+                Adress adress = new Adress();
+
+                adress.Id = (int)dr["Id"];
+                adress.Street = (string)dr["Street"];
+                adress.Number = (int)dr["Number"];
+                adress.Burgh = (string)dr["Burgh"];
+                adress.CEP = (string)dr["Cep"];
+                adress.Complement = (string)dr["Complement"];
+                adress.City = new City() { Description = (string)dr["City"], DtCadastro = (DateTime)dr["DtCadastro"] };
+
+                Adress.Add(adress);
+            }
+            return Adress;
+        }
     }
 }

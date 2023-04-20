@@ -55,10 +55,86 @@ namespace PacoteDeViagens.Services
             commandInsert.Parameters.Add(new SqlParameter("@Burgh", client.Address.Burgh));
             commandInsert.Parameters.Add(new SqlParameter("@Cep", client.Address.CEP));
             commandInsert.Parameters.Add(new SqlParameter("@Complement", client.Address.Complement));
-            commandInsert.Parameters.Add(new SqlParameter("@IdCity", client.Address.City));
+            commandInsert.Parameters.Add(new SqlParameter("@IdCity", InsertCity(client.Address.City)));
             commandInsert.Parameters.Add(new SqlParameter("@DtCadastro", client.Address.DtCadastro));
 
             return (int)commandInsert.ExecuteScalar();
+        }
+
+        private int InsertCity(City city)
+        {
+            string srtInsert = "INSERT  INTO City(Description, DtCadastro) VALUES (@Description, @DtCadastro); select cast(scope_identity() as int)";
+            SqlCommand commandinsert = new SqlCommand(srtInsert, conn);
+
+            commandinsert.Parameters.Add(new SqlParameter("@Description",city.Description));
+            commandinsert.Parameters.Add(new SqlParameter("@DtCadastro", city.DtCadastro));
+
+            return (int)commandinsert.ExecuteScalar();
+        }
+
+        public bool Delete(string client)
+        {
+            bool status = false;
+            try
+            {
+                string strDelete = "DELETE FROM Client WHERE Id = " + client;
+
+                SqlCommand commanddelete = new SqlCommand(strDelete, conn);
+
+                commanddelete.ExecuteNonQuery();
+
+                status = true;
+            }
+            catch (Exception ex) { status = false; throw; }
+            finally { conn.Close(); }
+            return status;
+        }
+
+        public List<Client> FindAll()
+        {
+            List<Client> clients = new List<Client>();
+
+            StringBuilder sb = new StringBuilder();
+
+            sb.Append(" select c.Id, ");
+            sb.Append("     c.Name, ");
+            sb.Append("     c.Telephone, ");
+            sb.Append("     c.DtCadastro, ");
+            sb.Append("     c.IdEndereco, ");
+            sb.Append("     a.Street, ");
+            sb.Append("     a.Number, ");
+            sb.Append("     a.Burgh, ");
+            sb.Append("     a.Cep, ");
+            sb.Append("     a.Complement, ");
+            sb.Append("     a.IdCity, ");
+            sb.Append("     ci.Description ");
+            sb.Append("   FROM Client c, Adress a, City ci ");
+            sb.Append(" WHERE c.IdEndereco = a.Id AND a.IdCity = ci.Id");
+
+            SqlCommand commandSelect = new(sb.ToString(), conn);
+            SqlDataReader dr = commandSelect.ExecuteReader();
+
+            while(dr.Read())
+            {
+                Client client = new Client();
+
+                client.Id = (int)dr["Id"];
+                client.Name = (string)dr["Name"];
+                client.Telefone = (string)dr["Telephone"];
+                client.DtCadastro = (DateTime)dr["DtCadastro"];
+                client.Address = new Adress()
+                {
+                    Id = (int)dr["IdEndereco"],
+                    Street = (string)dr["Street"],
+                    Number = (int)dr["Number"],
+                    Burgh = (string)dr["Burgh"],
+                    CEP = (string)dr["Cep"],
+                    Complement = (string)dr["Complement"]
+                };
+
+                clients.Add(client);
+            }
+            return clients;
         }
     }
 }

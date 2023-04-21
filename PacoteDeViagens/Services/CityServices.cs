@@ -44,7 +44,6 @@ namespace PacoteDeViagens.Services
             finally { conn.Close(); }
             return status;
         }
-
         public bool Delete(string city)
         {
             bool status = false;
@@ -63,7 +62,6 @@ namespace PacoteDeViagens.Services
             }finally { conn.Close(); }
             return status;
         }
-
         public List<City> FindAll()
         {
             List<City> Cities = new List<City>();

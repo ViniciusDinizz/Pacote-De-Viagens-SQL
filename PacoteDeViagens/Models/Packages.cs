@@ -14,5 +14,10 @@ namespace PacoteDeViagens.Models
         public DateTime DtCadastro { get; set; }
         public decimal Value { get; set; }
         public Client Client { get; set; }
+
+        public override string ToString()
+        {
+            return $"Id:{Id}\n{Hotel}\n{Ticket}\n{Client}\nData:{DtCadastro}\nValor{Value}";
+        }
     }
 }

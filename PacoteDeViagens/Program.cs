@@ -87,6 +87,6 @@ internal class Program
         //new AdressControler().Delete(1);
         //new CityController().Delete(2);
 
-        new HotelController().FindAll().ForEach(Console.WriteLine);
+        new PackageController().FindAll().ForEach(Console.WriteLine);
     }
 }

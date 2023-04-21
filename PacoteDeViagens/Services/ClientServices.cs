@@ -42,7 +42,6 @@ namespace PacoteDeViagens.Services
             } finally { conn.Close(); }
             return status;
         }
-
         private int InsertAdress(Client client)
         {
             string strInsert = "INSERT INTO Adress(Street, Number, Burgh, Cep, Complement, IdCity, DtCadastro) " +
@@ -60,7 +59,6 @@ namespace PacoteDeViagens.Services
 
             return (int)commandInsert.ExecuteScalar();
         }
-
         private int InsertCity(City city)
         {
             string srtInsert = "INSERT  INTO City(Description, DtCadastro) VALUES (@Description, @DtCadastro); select cast(scope_identity() as int)";
@@ -71,7 +69,6 @@ namespace PacoteDeViagens.Services
 
             return (int)commandinsert.ExecuteScalar();
         }
-
         public bool Delete(string client)
         {
             bool status = false;
@@ -89,7 +86,6 @@ namespace PacoteDeViagens.Services
             finally { conn.Close(); }
             return status;
         }
-
         public List<Client> FindAll()
         {
             List<Client> clients = new List<Client>();

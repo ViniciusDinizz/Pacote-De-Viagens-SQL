@@ -46,7 +46,6 @@ namespace PacoteDeViagens.Services
             } finally { conn.Close(); }
             return status;
         }
-
         private int InsertEndereco(Hotel hotel)
         {
             string strInsert = "INSERT INTO Adress (Street, Number, Burgh, Cep, Complement, IdCity, DtCadastro) " +
@@ -64,7 +63,6 @@ namespace PacoteDeViagens.Services
 
             return (int)commandInsert.ExecuteScalar();
         }
-
         private int InsertCity(City city)
         {
             string srtInsert = "INSERT  INTO City(Description, DtCadastro) VALUES (@Description, @DtCadastro); select cast(scope_identity() as int)";
@@ -75,7 +73,6 @@ namespace PacoteDeViagens.Services
 
             return (int)commandinsert.ExecuteScalar();
         }
-
         public bool Delete(string hotel)
         {
             bool status = false;
@@ -92,7 +89,6 @@ namespace PacoteDeViagens.Services
             finally { conn.Close(); }
             return status;
         }
-
         public List<Hotel> FindAll()
         {
             int idEnd = 0;
@@ -126,7 +122,6 @@ namespace PacoteDeViagens.Services
             }
             return lstHotel;
         }
-
         private List<Adress> GetListAdress(List<City> lstCity)
         {
             int iddCity = 0;
@@ -164,7 +159,6 @@ namespace PacoteDeViagens.Services
             reader.Close();
             return lstAdress;
         }
-
         private List<City> GetListCity()
         {
             List<City> list = new List<City>();
@@ -189,7 +183,6 @@ namespace PacoteDeViagens.Services
             reader.Close();
             return list;
         }
-
         private Adress TakeAdress(List<Adress> lstAdress, int idAdress)
         {
             Adress obAdress = new Adress();
@@ -202,7 +195,6 @@ namespace PacoteDeViagens.Services
             }
             return obAdress;
         }
-
         private City TakeCity (List<City> lstCity, int idCity)
         {
             City obCity = new City();

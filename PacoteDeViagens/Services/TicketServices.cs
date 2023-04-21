@@ -48,7 +48,6 @@ namespace PacoteDeViagens.Services
             finally { conn.Close(); }
             return status;
         }
-
         public int InsertAdressOrigin(Ticket ticket)
         {
             string strInsert = "INSERT INTO Adress (Street, Number, Burgh, Cep, Complement, IdCity, DtCadastro) " +
@@ -66,7 +65,6 @@ namespace PacoteDeViagens.Services
 
             return (int)commandInsert.ExecuteScalar();
         }
-
         public int InsertAdressDestin(Ticket ticket)
         {
             string strInsert = "INSERT INTO Adress (Street, Number, Burgh, Cep, Complement, IdCity, DtCadastro) " +
@@ -84,7 +82,6 @@ namespace PacoteDeViagens.Services
 
             return (int)commandInsert.ExecuteScalar();
         }
-
         public int InsertClient(Ticket ticket)
         {
             string strInsert = "INSERT INTO Client(Name, Telephone, IdEndereco, DtCadastro) " +
@@ -99,7 +96,6 @@ namespace PacoteDeViagens.Services
 
             return (int)commandInsert.ExecuteScalar();
         }
-
         private int InsertCity(City city)
         {
             string srtInsert = "INSERT  INTO City(Description, DtCadastro) VALUES (@Description, @DtCadastro); select cast(scope_identity() as int)";
@@ -110,7 +106,6 @@ namespace PacoteDeViagens.Services
 
             return (int)commandinsert.ExecuteScalar();
         }
-
         public int InsertAdress(Adress adress)
         {
             string strInsert = "INSERT INTO Adress (Street, Number, Burgh, Cep, Complement, IdCity, DtCadastro) " +
@@ -128,7 +123,6 @@ namespace PacoteDeViagens.Services
 
             return (int)commandInsert.ExecuteScalar();
         }
-
         public bool Delete(string ticket)
         {
             bool status = false;
@@ -146,7 +140,6 @@ namespace PacoteDeViagens.Services
             finally { conn.Close(); }
             return status;
         }
-
         public List<Ticket> FindAll()
         {
             List<City> lstCity = GetListCity();
@@ -185,7 +178,6 @@ namespace PacoteDeViagens.Services
             }
             return tickets;
         }
-
         private List<Client> GetListClient(List<Adress> lstAdress)
         {
             int IdEnd = 0;
@@ -218,7 +210,6 @@ namespace PacoteDeViagens.Services
             reader.Close();
             return lstClient;
         }
-
         private List<Adress> GetListAdress(List<City> lstCity)
         {
             int iddCity = 0;
@@ -256,7 +247,6 @@ namespace PacoteDeViagens.Services
             reader.Close();
             return lstAdress;
         }
-
         private List<City> GetListCity()
         {
             List<City> list = new List<City>();
@@ -293,7 +283,6 @@ namespace PacoteDeViagens.Services
             }
             return obAdress;
         }
-
         private City TakeCity(List<City> lstCity, int idCity)
         {
             City obCity = new();
@@ -306,7 +295,6 @@ namespace PacoteDeViagens.Services
             }
             return obCity;
         }
-
         public Client TakeClient(List<Client> lstClient, int idClient)
         {
             Client obClient = new();

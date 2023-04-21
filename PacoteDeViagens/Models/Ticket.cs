@@ -17,7 +17,7 @@ namespace PacoteDeViagens.Models
 
         public override string ToString()
         {
-            return $"{Client}\nId:{Id}\nOrigin:{Origin}\nDestin:{Destin}\nData:{Data}\nValor:{Value}\n\n";
+            return $"Id:{Id}\nOrigin:{Origin}\nDestin:{Destin}\nData:{Data}\nValor:{Value}\n";
         }
     }
 }

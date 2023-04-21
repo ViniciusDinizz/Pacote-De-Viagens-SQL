@@ -48,7 +48,6 @@ namespace PacoteDeViagens.Services
 
             return status;
         }
-
         private int InsertCity (Adress adress)
         {
             string srtInsert = "INSERT  INTO City(Description, DtCadastro) VALUES (@Description, @DtCadastro); select cast(scope_identity() as int)";
@@ -59,7 +58,6 @@ namespace PacoteDeViagens.Services
 
             return (int)commandinsert.ExecuteScalar();
         }
-
         public bool Delete(string adress)
         {
             bool status = false;
@@ -78,7 +76,6 @@ namespace PacoteDeViagens.Services
 
             return status;
         }
-
         public List<Adress> FindAll() 
         {
             List<Adress> Adress = new();
